@@ -20,12 +20,13 @@ public class Main extends Application{
   public void start(Stage primaryStage) throws Exception {
     try {
       // Colocando FXML em uma variavel que consiguimos converter para scene 
-      Parent home = FXMLLoader.load(getClass().getResource("view/Home.fxml"));
+      Parent home = FXMLLoader.load(getClass().getResource("view/TelaPrincipal.fxml"));
 
       // Estamos trocado o stage que vamos apresentar para o FXML
       primaryStage.setScene(new Scene(home));
 
       // Apresentamos o stage com o FXML
+      primaryStage.setResizable(false);
       primaryStage.show();
     } catch (Exception e) {
       e.printStackTrace();
