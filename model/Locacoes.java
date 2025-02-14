@@ -12,8 +12,15 @@ public class Locacoes {
     private String formaPagamento; // Forma de pagamento
     private double valorPago; // Valor pago
 
-    // Construtor
+    // Construtor sem idLocacao, pois ele será gerado automaticamente pelo banco
     public Locacoes(int idFuncionario, int idCliente, String placaVeiculo, LocalDate dataInicio, LocalDate dataTermino, String formaPagamento, double valorPago) {
+        if (dataInicio.isAfter(dataTermino)) {
+            throw new IllegalArgumentException("A data de início não pode ser posterior à data de término.");
+        }
+        if (valorPago < 0) {
+            throw new IllegalArgumentException("O valor pago não pode ser negativo.");
+        }
+        
         this.idFuncionario = idFuncionario;
         this.idCliente = idCliente;
         this.placaVeiculo = placaVeiculo;

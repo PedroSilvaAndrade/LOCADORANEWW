@@ -1,89 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="495.0" maxWidth="832.0" minHeight="495.0" minWidth="832.0" prefHeight="495.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaPrincipalController">
+<Pane maxHeight="495.0" maxWidth="850.0" minHeight="0.0" minWidth="850.0" prefHeight="495.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaPrincipalController">
    <children>
-      <Pane layoutY="-18.0" prefHeight="543.0" prefWidth="142.0" style="-fx-background-color: #9370DB;">
+      <Pane layoutX="-1.0" prefHeight="495.0" prefWidth="143.0" style="-fx-background-color: #9370DB;">
          <children>
-            <Button fx:id="btnCadastramento" layoutX="12.0" layoutY="43.0" mnemonicParsing="false" onAction="#irParaCadastro" style="-fx-background-color: #9370DB;" text="Cadastrar Locação">
+            <Button fx:id="BotaoCadastro" layoutX="12.0" layoutY="43.0" mnemonicParsing="false" onAction="#irParaCadastro" style="-fx-background-color: #9370DB;" text="Cadastrar Locação">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="btnHistorico" layoutX="15.0" layoutY="87.0" mnemonicParsing="false" style="-fx-background-color: #9370DB;" text="Historico Locação">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnVoltar" layoutX="20.0" layoutY="439.0" mnemonicParsing="false" onAction="#irParaTelaInicial" style="-fx-background-color: #9370DB;" text="Voltar ao Início">
+            <Button fx:id="BotaoHistorico" layoutX="13.0" layoutY="85.0" mnemonicParsing="false" style="-fx-background-color: #9370DB;" text="Historico Locação">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
          </children>
       </Pane>
-      <TabPane fx:id="tabPane" layoutX="142.0" layoutY="-34.0" prefHeight="543.0" prefWidth="696.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-            <Tab fx:id="tabInicio" text="Inicio">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
-            </Tab>
-          <Tab fx:id="tabCadastro" text="Cadastro">
-               <content>
-                  <Pane prefHeight="514.0" prefWidth="718.0">
-                     <children>
-                        <Label fx:id="lblNome" layoutX="154.0" layoutY="31.0" text="Nome">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblCNH" layoutX="155.0" layoutY="102.0" text="n CNH">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblIdade" layoutX="156.0" layoutY="174.0" text="Idade">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblSexo" layoutX="158.0" layoutY="251.0" text="Sexo">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblDataIn" layoutX="154.0" layoutY="320.0" text="Data Inicio">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblDataTer" layoutX="450.0" layoutY="320.0" text="Data Término ">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="txtNome" layoutX="155.0" layoutY="56.0" prefHeight="25.0" prefWidth="353.0" />
-                        <TextField fx:id="txtCNH" layoutX="155.0" layoutY="127.0" prefHeight="25.0" prefWidth="353.0" />
-                        <TextField fx:id="txtIdade" layoutX="155.0" layoutY="206.0" prefHeight="25.0" prefWidth="116.0" />
-                        <TextField fx:id="txtSexo" layoutX="155.0" layoutY="283.0" prefHeight="25.0" prefWidth="116.0" />
-                        <TextField fx:id="txtDataIn" layoutX="155.0" layoutY="351.0" prefHeight="25.0" prefWidth="116.0" />
-                        <TextField fx:id="txtDataTer" layoutX="450.0" layoutY="351.0" prefHeight="25.0" prefWidth="116.0" />
-                        <Button fx:id="btnCadrastramentoLoc" layoutX="284.0" layoutY="429.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Cadastrar" />
-                     </children>
-                  </Pane>
-               </content>
-          </Tab>
-          <Tab fx:id="tabHistorico" text="Historico">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
    </children>
 </Pane>

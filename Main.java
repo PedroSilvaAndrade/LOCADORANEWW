@@ -23,11 +23,14 @@ public class Main extends Application{
       Parent home = FXMLLoader.load(getClass().getResource("view/TelaPrincipal.fxml"));
 
       // Estamos trocado o stage que vamos apresentar para o FXML
-      primaryStage.setScene(new Scene(home));
+      primaryStage.setScene(new Scene(home, 800, 495));
 
       // Apresentamos o stage com o FXML
       primaryStage.setResizable(false);
       primaryStage.show();
+      
+      // Garante que o programa sera encerrado
+      primaryStage.setOnCloseRequest(e -> {System.exit(0);}); 
     } catch (Exception e) {
       e.printStackTrace();
     }

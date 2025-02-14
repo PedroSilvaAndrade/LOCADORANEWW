@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="495.0" maxWidth="832.0" minHeight="495.0" minWidth="832.0" prefHeight="495.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastroController">
+   <children>
+      <Pane prefHeight="495.0" prefWidth="142.0" style="-fx-background-color: #9370DB;">
+         <children>
+            <Button fx:id="BotaoVoltar" layoutX="1.0" layoutY="435.0" mnemonicParsing="false" onAction="#voltarTelaPrincipal" style="-fx-background-color: #9370DB;" text="Voltar a Tela Principal">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <TextField fx:id="TextID_Funcionario" layoutX="210.0" layoutY="85.0" promptText="ID do Funcionario" />
+      <TextField fx:id="TextID_Cliente" layoutX="210.0" layoutY="185.0" promptText="ID do Cliente" />
+      <TextField fx:id="TextPlaca" layoutX="575.0" layoutY="285.0" promptText="Placa do Veículo" />
+      <TextField fx:id="TextForma_de_Pagamento" layoutX="210.0" layoutY="285.0" promptText="Forma de pagamento" />
+      <Button fx:id="BotaoConfirmarCadastro" layoutX="586.0" layoutY="385.0" mnemonicParsing="false" style="-fx-background-color: #9370DB;" text="Confirmar Cadastro">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <TextField fx:id="TextValor_Pagar" layoutX="210.0" layoutY="385.0" promptText="Valor para pagar" />
+      <DatePicker fx:id="DateDataInicio" layoutX="562.0" layoutY="85.0" promptText="Data Inicio" />
+      <DatePicker fx:id="DateDataFinal" layoutX="562.0" layoutY="185.0" promptText="Data Final" />
+   </children>
+</Pane>
+
