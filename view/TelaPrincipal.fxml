@@ -10,7 +10,7 @@
 
 <Pane maxHeight="495.0" maxWidth="850.0" minHeight="0.0" minWidth="850.0" prefHeight="495.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaPrincipalController">
    <children>
-      <Pane layoutX="-1.0" prefHeight="541.0" prefWidth="143.0" style="-fx-background-color: #4B0082;">
+      <Pane layoutX="-1.0" prefHeight="593.0" prefWidth="142.0" style="-fx-background-color: #4B0082;">
          <children>
             <Button fx:id="BotaoCadastro" layoutX="11.0" layoutY="129.0" mnemonicParsing="false" onAction="#irParaCadastro" style="-fx-background-color: #4B0082; -fx-border-radius: 20; -fx-border-color: #ffffff;" text="Cadastrar Locação" textFill="WHITE">
                <font>

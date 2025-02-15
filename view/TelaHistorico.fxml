@@ -14,14 +14,14 @@
    <children>
       <Pane prefHeight="495.0" prefWidth="142.0" style="-fx-background-color: #4B0082;">
          <children>
-            <Button fx:id="BotaoVoltar" layoutX="3.0" layoutY="432.0" mnemonicParsing="false" onAction="#voltarTelaPrincipal" style="-fx-background-color: #9370DB; -fx-border-color: #000000;" text="Voltar a Tela Principal">
+            <Button fx:id="BotaoVoltar" layoutX="3.0" layoutY="432.0" mnemonicParsing="false" onAction="#voltarTelaPrincipal" style="-fx-background-color: #4B0082; -fx-border-color: #ffffff; -fx-border-radius: 20;" text="Voltar a Tela Principal" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Semibold" size="12.0" />
                </font>
             </Button>
          </children>
       </Pane>
-      <TextField fx:id="TextID_Funcionario" layoutX="149.0" layoutY="28.0" promptText="ID da Locação" />
+      <TextField fx:id="txtIDPesquisa" layoutX="149.0" layoutY="28.0" promptText="ID da Locação" />
       <TableView layoutX="142.0" layoutY="71.0" prefHeight="424.0" prefWidth="690.0">
         <columns>
           <TableColumn prefWidth="75.0" text="ID Locação" />
@@ -34,6 +34,11 @@
             <TableColumn minWidth="9.0" prefWidth="78.0" text="Valor Pago" />
         </columns>
       </TableView>
+      <Button fx:id="btnPesquisar" layoutX="338.0" layoutY="28.0" mnemonicParsing="false" onAction="#acaoPesquisar" style="-fx-background-color: #4B0082;" text="Pesquisar" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Semibold" size="12.0" />
+         </font>
+      </Button>
       
    </children>
 </Pane>

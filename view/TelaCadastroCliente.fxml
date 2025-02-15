@@ -14,7 +14,7 @@
    <children>
       <Pane prefHeight="495.0" prefWidth="142.0" style="-fx-background-color: #4B0082;">
          <children>
-            <Button fx:id="BotaoVoltar" layoutX="3.0" layoutY="435.0" mnemonicParsing="false" onAction="#voltarTelaPrincipal" style="-fx-background-color: #4B0082; -fx-border-color: #ffffff; -fx-border-radius: 20;" text="Voltar a Tela Principal" textFill="WHITE">
+            <Button fx:id="BotaoVoltar" layoutX="3.0" layoutY="432.0" mnemonicParsing="false" onAction="#voltarTelaPrincipal" style="-fx-background-color: #4B0082; -fx-border-color: #ffffff; -fx-border-radius: 20;" text="Voltar a Tela Principal" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Semibold" size="12.0" />
                </font>
