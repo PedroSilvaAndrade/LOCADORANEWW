@@ -17,7 +17,7 @@
                   <Font name="Segoe UI Semibold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="BotaoHistorico" layoutX="13.0" layoutY="206.0" mnemonicParsing="false" style="-fx-background-color: #4B0082; -fx-border-color: #ffffff; -fx-border-radius: 20;" text="Historico Locação" textFill="WHITE">
+            <Button fx:id="btnHistorico" layoutX="13.0" layoutY="206.0" mnemonicParsing="false" onAction="#irParaHistorico" style="-fx-background-color: #4B0082; -fx-border-color: #ffffff; -fx-border-radius: 20;" text="Historico Locação" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Semibold" size="12.0" />
                </font>

@@ -18,7 +18,7 @@ public class TelaPrincipalController {
     private Button BotaoCadrasto;
 
     @FXML
-    private Button BotaoHistorico;
+    private Button btnHistorico;
 
     @FXML
     private Button BotaoCadastroCliente;
@@ -48,6 +48,21 @@ public class TelaPrincipalController {
         // Define a nova cena e exibe
         window.setScene(scene);
         window.show();
+    }
+
+    @FXML
+    void irParaHistorico(ActionEvent event) throws IOException {
+            // Carrega o arquivo FXML da tela de cadastro
+            Parent root = FXMLLoader.load(getClass().getResource("/view/TelaHistorico.fxml"));
+        
+            // Obtém a janela atual (stage) e configura a nova cena
+            window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+        
+            // Define a nova cena e exibe
+            window.setScene(scene);
+            window.show();
+
     }
 
     @FXML

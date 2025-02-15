@@ -1,16 +1,16 @@
 package controller;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import model.dao.LocacoesDAO;
-import model.Locacoes;
-
-import java.sql.SQLException;
-import java.util.List;
+import javafx.stage.Stage;
 
 public class HistoricoController {
 
@@ -18,58 +18,27 @@ public class HistoricoController {
     private Button BotaoVoltar;
 
     @FXML
-    private TextField txtPesquisa;
+    private TextField txtIDPesquisa;
 
     @FXML
     private Button btnPesquisar;
 
-    @FXML
-    private TableView<Locacoes> tableView; // Tabela para exibir as locações
-    
-    @FXML
-    private TableColumn<Locacoes, Integer> colIdLocacao;
-    
-    @FXML
-    private TableColumn<Locacoes, Integer> colIdFuncionario;
+    private Stage window;
+    private Scene scene;
+
 
     @FXML
-    private TableColumn<Locacoes, Integer> colIdCliente;
-
-    @FXML
-    private TableColumn<Locacoes, String> colPlacaVeiculo;
-
-    @FXML
-    private TableColumn<Locacoes, String> colDataInicio;
-
-    @FXML
-    private TableColumn<Locacoes, String> colDataTermino;
-
-    @FXML
-    private TableColumn<Locacoes, String> colFormaPagamento;
-
-    @FXML
-    private TableColumn<Locacoes, Double> colValorPago;
-
-    @FXML
-    void voltarTelaPrincipal(ActionEvent event) {
-        // Adicione a lógica para voltar para a tela principal
+    void voltarTelaPrincipal(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/TelaPrincipal.fxml"));
+        window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        window.setScene(scene);
+        window.show();
     }
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        int idLocacao = Integer.parseInt(txtPesquisa.getText()); // Obtém o ID da locação do campo de texto
-        LocacoesDAO locacoesDAO = new LocacoesDAO();
-        try {
-            List<Locacoes> locacoes = locacoesDAO.buscarLocacoesPorId(idLocacao); // Chama o método para buscar locações
 
-            // Limpa a tabela antes de adicionar novos itens
-            tableView.getItems().clear();
-            tableView.getItems().addAll(locacoes);
-
-        } catch (SQLException e) {
-            e.printStackTrace(); // Trata exceções de SQL
-        } catch (NumberFormatException e) {
-            System.out.println("Por favor, insira um ID de locação válido.");
-        }
     }
+
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="495.0" maxWidth="832.0" minHeight="495.0" minWidth="832.0" prefHeight="495.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HistoricoController">
+<Pane maxHeight="495.0" maxWidth="832.0" minHeight="495.0" minWidth="832.0" prefHeight="495.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HistoricoController">
    <children>
       <Pane prefHeight="495.0" prefWidth="142.0" style="-fx-background-color: #4B0082;">
          <children>
