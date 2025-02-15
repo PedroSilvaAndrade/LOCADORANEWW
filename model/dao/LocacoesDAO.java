@@ -2,33 +2,48 @@ package model.dao;
 
 import model.Locacoes;
 import model.db.ConnectionFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class LocacoesDAO {
-    public void cadastrarLocacao(Locacoes locacao) {
-        String querySQL = "INSERT INTO Locacoes(id_funcionario, id_cliente, placa_veiculo, data_inicio, data_termino, forma_pagamento, valor_pago) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
+    // ... Método cadastrarLocacao existente ...
+
+    public Locacoes buscarLocacaoPorId(int idLocacao) {
+        String querySQL = "SELECT * FROM Locacoes WHERE id_locacao = ?";
         try (Connection conexao = ConnectionFactory.getConnection();
              PreparedStatement stmt = conexao.prepareStatement(querySQL)) {
-
-            // Definindo os parâmetros da consulta
-            stmt.setInt(1, locacao.getIdFuncionario());
-            stmt.setInt(2, locacao.getIdCliente());
-            stmt.setString(3, locacao.getPlacaVeiculo());
-            stmt.setDate(4, java.sql.Date.valueOf(locacao.getDataInicio()));
-            stmt.setDate(5, java.sql.Date.valueOf(locacao.getDataTermino()));
-            stmt.setString(6, locacao.getFormaPagamento());
-            stmt.setDouble(7, locacao.getValorPago());
-
-            // Executando a atualização
-            stmt.executeUpdate();
-            System.out.println("Locação cadastrada com sucesso!");
-
+            
+            stmt.setInt(1, idLocacao);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Locacoes locacao = new Locacoes();
+                    locacao.setIdLocacao(rs.getInt("id_locacao"));
+                    locacao.setIdFuncionario(rs.getInt("id_funcionario"));
+                    locacao.setIdCliente(rs.getInt("id_cliente"));
+                    locacao.setPlacaVeiculo(rs.getString("placa_veiculo"));
+                    
+                    // Converter java.sql.Date para LocalDate
+                    java.sql.Date dataInicio = rs.getDate("data_inicio");
+                    java.sql.Date dataTermino = rs.getDate("data_termino");
+                    locacao.setDataInicio(dataInicio.toLocalDate());
+                    locacao.setDataTermino(dataTermino.toLocalDate());
+                    
+                    locacao.setFormaPagamento(rs.getString("forma_pagamento"));
+                    locacao.setValorPago(rs.getDouble("valor_pago"));
+                    
+                    return locacao;
+                }
+            }
+            
         } catch (SQLException e) {
-            System.out.println("Erro ao cadastrar locação: " + e.getMessage());
+            System.out.println("Erro ao buscar locação: " + e.getMessage());
         }
+        
+        return null; // Retorna null se não encontrar
     }
 }
