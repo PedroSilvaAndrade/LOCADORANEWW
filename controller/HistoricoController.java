@@ -19,6 +19,7 @@ import model.dao.LocacoesDAO;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class HistoricoController {
 
@@ -30,80 +31,95 @@ public class HistoricoController {
 
     @FXML
     private TableView<Locacoes> tbTabela;
-    
+
     @FXML
     private TableColumn<Locacoes, Integer> colIdLocacao;
-    
+
     @FXML
     private TableColumn<Locacoes, Integer> colIdCliente;
-    
+
     @FXML
     private TableColumn<Locacoes, Integer> colIdFuncionario;
-    
+
     @FXML
     private TableColumn<Locacoes, String> colPlacaVeiculo;
-    
+
     @FXML
     private TableColumn<Locacoes, LocalDate> colDataInicio;
-    
+
     @FXML
     private TableColumn<Locacoes, LocalDate> colDataTermino;
-    
+
     @FXML
     private TableColumn<Locacoes, String> colFormaPagamento;
-    
+
     @FXML
     private TableColumn<Locacoes, Double> colValorPago;
 
     @FXML
+    private Button btnDelLocacao;
+
+    @FXML
     private Button btnPesquisar;
-    
+
     private LocacoesDAO locacoesDAO;
 
     private Stage window;
     private Scene scene;
-    
-    @FXML
-public void initialize() {
-    // Inicializar o DAO
-    locacoesDAO = new LocacoesDAO();
-    
-    // Verificar e configurar as colunas da tabela
-    if (colIdLocacao != null) {
-        colIdLocacao.setCellValueFactory(new PropertyValueFactory<>("idLocacao"));
-    }
-    
-    if (colIdCliente != null) {
-        colIdCliente.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
-    }
-    
-    if (colIdFuncionario != null) {
-        colIdFuncionario.setCellValueFactory(new PropertyValueFactory<>("idFuncionario"));
-    }
-    
-    if (colPlacaVeiculo != null) {
-        colPlacaVeiculo.setCellValueFactory(new PropertyValueFactory<>("placaVeiculo"));
-    }
-    
-    if (colDataInicio != null) {
-        colDataInicio.setCellValueFactory(new PropertyValueFactory<>("dataInicio"));
-    }
-    
-    if (colDataTermino != null) {
-        colDataTermino.setCellValueFactory(new PropertyValueFactory<>("dataTermino"));
-    }
-    
-    if (colFormaPagamento != null) {
-        colFormaPagamento.setCellValueFactory(new PropertyValueFactory<>("formaPagamento"));
-    }
-    
-    if (colValorPago != null) {
-        colValorPago.setCellValueFactory(new PropertyValueFactory<>("valorPago"));
-    }
-}
 
     @FXML
-    void voltarTelaPrincipal(ActionEvent event) throws IOException{
+    void acaoDelLocacao(ActionEvent event) {
+        // Obter a locação selecionada na tabela
+        Locacoes locacaoSelecionada = tbTabela.getSelectionModel().getSelectedItem();
+
+        if (locacaoSelecionada == null) {
+            System.out.println("Nenhuma locação selecionada!");
+            return;
+        }
+
+        // Deletar a locação do banco de dados
+        boolean deletado = locacoesDAO.deletarLocacao(locacaoSelecionada.getIdLocacao());
+
+        if (deletado) {
+            System.out.println("Locação deletada com sucesso!");
+
+            // Remover a locação da tabela
+            tbTabela.getItems().remove(locacaoSelecionada);
+        } else {
+            System.out.println("Erro ao deletar locação!");
+        }
+    }
+
+    @FXML
+    public void initialize() {
+        // Inicializar o DAO
+        locacoesDAO = new LocacoesDAO();
+
+        // Configurar as colunas da tabela
+        colIdLocacao.setCellValueFactory(new PropertyValueFactory<>("idLocacao"));
+        colIdCliente.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
+        colIdFuncionario.setCellValueFactory(new PropertyValueFactory<>("idFuncionario"));
+        colPlacaVeiculo.setCellValueFactory(new PropertyValueFactory<>("placaVeiculo"));
+        colDataInicio.setCellValueFactory(new PropertyValueFactory<>("dataInicio"));
+        colDataTermino.setCellValueFactory(new PropertyValueFactory<>("dataTermino"));
+        colFormaPagamento.setCellValueFactory(new PropertyValueFactory<>("formaPagamento"));
+        colValorPago.setCellValueFactory(new PropertyValueFactory<>("valorPago"));
+
+        // Carregar todas as locações ao inicializar
+        carregarTodasLocacoes();
+    }
+
+    private void carregarTodasLocacoes() {
+        // Buscar todas as locações do banco de dados
+        List<Locacoes> locacoes = locacoesDAO.buscarTodasLocacoes();
+
+        // Adicionar as locações à tabela
+        ObservableList<Locacoes> listaLocacoes = FXCollections.observableArrayList(locacoes);
+        tbTabela.setItems(listaLocacoes);
+    }
+
+    @FXML
+    void voltarTelaPrincipal(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/TelaPrincipal.fxml"));
         window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -120,15 +136,15 @@ public void initialize() {
                 System.out.println("Por favor, digite um ID de locação");
                 return;
             }
-            
+
             int idLocacao = Integer.parseInt(idText);
-            
+
             // Buscar a locação no banco de dados
             Locacoes locacao = locacoesDAO.buscarLocacaoPorId(idLocacao);
-            
+
             // Limpar a tabela
             tbTabela.getItems().clear();
-            
+
             if (locacao != null) {
                 // Adicionar a locação encontrada à tabela
                 ObservableList<Locacoes> listaLocacoes = FXCollections.observableArrayList(locacao);
@@ -136,7 +152,7 @@ public void initialize() {
             } else {
                 System.out.println("Locação não encontrada");
             }
-            
+
         } catch (NumberFormatException e) {
             System.out.println("Por favor, digite um número válido para o ID");
         }
