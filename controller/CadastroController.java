@@ -123,6 +123,16 @@ public class CadastroController {
                 return;
             }
 
+            // Verificar disponibilidade do veículo
+            CadastroDAO dao = new CadastroDAO();
+            boolean veiculoDisponivel = dao.verificarDisponibilidadeVeiculo(placa, dataInicio, dataFinal);
+
+            if (!veiculoDisponivel) {
+                System.out.println("Veículo indisponível no período selecionado!");
+                lblStatus.setText("Indisponível");
+                return; // Cancela a locação
+            }
+
             // Definir o status como "Disponivel" por padrão
             String status = "Disponivel"; // Valor padrão
 
@@ -138,7 +148,6 @@ public class CadastroController {
             dadosFormulario.add(status); // Adiciona o status como String
 
             // Salvar no banco
-            CadastroDAO dao = new CadastroDAO();
             dao.inserirCadastro(
                 idLocacaoValue,
                 idFuncionario,
