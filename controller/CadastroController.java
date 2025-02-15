@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.dao.CadastroDAO;
+import model.dao.CadastroClienteDAO;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
@@ -69,7 +70,7 @@ public class CadastroController {
 
         // Inicializa as ChoiceBox com as opções
         cbFuncionarioID.getItems().addAll("Pedro, ID 1", "Rafael, ID 2", "Davi, ID 3");
-        cbClienteID.getItems().addAll("ID 1", "ID 2", "ID 3");
+        carregarClientes(); // Carrega os clientes do banco de dados
         cbFormaPagamento.getItems().addAll("Cartão", "Dinheiro", "Transferência", "PIX");
         cbPlacaVeiculo.getItems().addAll("ABC1D23", "DEF4G56", "GHI7H89", "JKL0I12", "MNO3P45");
     }
@@ -78,6 +79,17 @@ public class CadastroController {
         Random random = new Random();
         int idAleatorio = random.nextInt(1000) + 1; // Gera um número aleatório de 1 a 1000
         idLocacao.setText(String.valueOf(idAleatorio)); // Exibe o ID aleatório no Label
+    }
+
+    private void carregarClientes() {
+        // Cria uma instância do CadastroClienteDAO
+        CadastroClienteDAO clienteDAO = new CadastroClienteDAO();
+
+        // Busca todos os clientes do banco de dados
+        List<String> clientes = clienteDAO.buscarTodosClientes();
+
+        // Adiciona os clientes à ChoiceBox
+        cbClienteID.getItems().addAll(clientes);
     }
 
     @FXML
@@ -100,7 +112,7 @@ public class CadastroController {
 
             // Extrair IDs dos valores selecionados
             int idFuncionario = Integer.parseInt(funcionarioSelecionado.split(", ID ")[1]);
-            int idCliente = Integer.parseInt(clienteSelecionado.split("ID ")[1]);
+            int idCliente = Integer.parseInt(clienteSelecionado.split(", ID ")[1]); // Ajuste para o novo formato
             String placa = placaSelecionada;
             String formaPagamento = formaPagamentoSelecionada;
 

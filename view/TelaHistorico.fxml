@@ -21,7 +21,7 @@
             </Button>
          </children>
       </Pane>
-      <TextField fx:id="txtIDPesquisa" layoutX="149.0" layoutY="28.0" promptText="ID da Locação" />
+      <TextField fx:id="txtIDPesquisa" layoutX="168.0" layoutY="28.0" promptText="ID da Locação" />
       <TableView fx:id="tbTabela" layoutX="142.0" layoutY="71.0" prefHeight="424.0" prefWidth="690.0">
         <columns>
           <TableColumn fx:id="colIdLocacao" prefWidth="75.0" text="ID Locação" />
@@ -34,11 +34,16 @@
             <TableColumn fx:id="colValorPago" minWidth="9.0" prefWidth="78.0" text="Valor Pago" />
         </columns>
       </TableView>
-      <Button fx:id="btnPesquisar" layoutX="338.0" layoutY="28.0" mnemonicParsing="false" onAction="#acaoPesquisar" style="-fx-background-color: #4B0082;" text="Pesquisar" textFill="WHITE">
+      <Button fx:id="btnPesquisar" layoutX="339.0" layoutY="28.0" mnemonicParsing="false" onAction="#acaoPesquisar" style="-fx-background-color: #4B0082;" text="Pesquisar" textFill="WHITE">
          <font>
             <Font name="Segoe UI Semibold" size="12.0" />
          </font>
       </Button>
+      <Label layoutX="14.0" layoutY="21.0" text="LOCADORA PEDRO" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="16.0" />
+         </font>
+      </Label>
       
    </children>
 </Pane>
