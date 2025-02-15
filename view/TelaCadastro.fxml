@@ -12,30 +12,82 @@
 
 <Pane maxHeight="495.0" maxWidth="832.0" minHeight="495.0" minWidth="832.0" prefHeight="495.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastroController">
    <children>
-      <Pane prefHeight="495.0" prefWidth="142.0" style="-fx-background-color: #9370DB;">
+      <Pane prefHeight="495.0" prefWidth="142.0" style="-fx-background-color: #4B0082;">
          <children>
-            <Button fx:id="BotaoVoltar" layoutX="1.0" layoutY="435.0" mnemonicParsing="false" onAction="#voltarTelaPrincipal" style="-fx-background-color: #9370DB;" text="Voltar a Tela Principal">
+            <Button fx:id="BotaoVoltar" layoutY="434.0" mnemonicParsing="false" onAction="#voltarTelaPrincipal" style="-fx-background-color: #4B0082; -fx-border-color: #ffffff; -fx-border-radius: 20;" text="Voltar a Tela Principal" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
          </children>
       </Pane>
-      <TextField fx:id="TextID_Funcionario" layoutX="210.0" layoutY="85.0" promptText="ID do Funcionario" />
-      <TextField fx:id="TextID_Cliente" layoutX="210.0" layoutY="185.0" promptText="ID do Cliente" />
-      <TextField fx:id="TextPlaca" layoutX="575.0" layoutY="285.0" promptText="Placa do Veículo" />
-      <TextField fx:id="TextForma_de_Pagamento" layoutX="210.0" layoutY="285.0" promptText="Forma de pagamento" />
-      <Button fx:id="BotaoConfirmarCadastro" layoutX="586.0" layoutY="385.0" mnemonicParsing="false" onAction="#salvarDados" style="-fx-background-color: #9370DB;" text="Confirmar Cadastro">
+      <Button fx:id="BotaoConfirmarCadastro" layoutX="589.0" layoutY="407.0" mnemonicParsing="false" onAction="#salvarDados" style="-fx-background-color: #4B0082; -fx-border-radius: 20;" text="Confirmar Cadastro" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Segoe UI Semibold" size="12.0" />
          </font>
       </Button>
-      <TextField fx:id="TextValor_Pagar" layoutX="210.0" layoutY="385.0" promptText="Valor para pagar" />
-      <DatePicker fx:id="DateDataInicio" layoutX="562.0" layoutY="85.0" promptText="Data Inicio" />
-      <DatePicker fx:id="DateDataFinal" layoutX="562.0" layoutY="185.0" promptText="Data Final" />
-      <Label fx:id="idLocacao" layoutX="284.0" layoutY="39.0" text="ID Locação" />
-      <Label layoutX="217.0" layoutY="39.0" text="ID Locação:" />
-      <Label layoutX="613.0" layoutY="324.0" text="Status:" />
-      <Label fx:id="lblStatus" layoutX="649.0" layoutY="324.0" text="Disponivel" />
+      <TextField fx:id="TextValor_Pagar" layoutX="564.0" layoutY="312.0" prefHeight="25.0" prefWidth="174.0" promptText="Valor para pagar" />
+      <DatePicker fx:id="DateDataInicio" layoutX="561.0" layoutY="110.0" promptText="Data Inicio" />
+      <DatePicker fx:id="DateDataFinal" layoutX="561.0" layoutY="210.0" promptText="Data Final" />
+      <Label fx:id="idLocacao" layoutX="276.0" layoutY="31.0" text="ID Locação">
+         <font>
+            <Font name="Segoe UI Semibold" size="12.0" />
+         </font></Label>
+      <Label layoutX="206.0" layoutY="31.0" text="ID Locação:">
+         <font>
+            <Font name="Segoe UI Semibold" size="12.0" />
+         </font></Label>
+      <Label layoutX="231.0" layoutY="432.0" text="Status:">
+         <font>
+            <Font name="Segoe UI Semibold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblStatus" layoutX="277.0" layoutY="432.0" text="Disponivel">
+         <font>
+            <Font name="Segoe UI Semibold" size="12.0" />
+         </font></Label>
+      <ChoiceBox fx:id="cbFuncionarioID" layoutX="209.0" layoutY="110.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="cbClienteID" layoutX="209.0" layoutY="210.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="cbFormaPagamento" layoutX="209.0" layoutY="312.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="cbPlacaVeiculo" layoutX="209.0" layoutY="407.0" prefWidth="150.0" />
+      <Label layoutX="210.0" layoutY="93.0" text="ID Funcionário">
+         <font>
+            <Font name="Segoe UI Semibold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="209.0" layoutY="193.0" text="ID Clliente">
+         <font>
+            <Font name="Segoe UI Semibold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="209.0" layoutY="295.0" text="Forma de Pagamento">
+         <font>
+            <Font name="Segoe UI Semibold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="205.0" layoutY="390.0" text="Placa do Veículo">
+         <font>
+            <Font name="Segoe UI Semibold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="561.0" layoutY="93.0" text="Data de Inicio">
+         <font>
+            <Font name="Segoe UI Semibold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="561.0" layoutY="193.0" text="Data de Término">
+         <font>
+            <Font name="Segoe UI Semibold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="564.0" layoutY="295.0" text="Valor da Locação">
+         <font>
+            <Font name="Segoe UI Semibold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="21.0" text="LOCADORA PEDRO" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="16.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

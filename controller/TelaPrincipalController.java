@@ -22,6 +22,16 @@ public class TelaPrincipalController {
 
     @FXML
     private Button BotaoCadastroCliente;
+
+    @FXML
+    private Button btnSair;
+
+    @FXML
+    void sair(ActionEvent event) {
+        // Obtém a janela atual (stage) e fecha
+        window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.close(); // Fecha a aplicação
+    }
     
     private Stage window;
     private Scene scene;

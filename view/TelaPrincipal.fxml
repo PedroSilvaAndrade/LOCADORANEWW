@@ -10,21 +10,31 @@
 
 <Pane maxHeight="495.0" maxWidth="850.0" minHeight="0.0" minWidth="850.0" prefHeight="495.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaPrincipalController">
    <children>
-      <Pane layoutX="-1.0" prefHeight="495.0" prefWidth="143.0" style="-fx-background-color: #9370DB;">
+      <Pane layoutX="-1.0" prefHeight="541.0" prefWidth="143.0" style="-fx-background-color: #4B0082;">
          <children>
-            <Button fx:id="BotaoCadastro" layoutX="12.0" layoutY="43.0" mnemonicParsing="false" onAction="#irParaCadastro" style="-fx-background-color: #9370DB;" text="Cadastrar Locação">
+            <Button fx:id="BotaoCadastro" layoutX="11.0" layoutY="129.0" mnemonicParsing="false" onAction="#irParaCadastro" style="-fx-background-color: #4B0082; -fx-border-radius: 20; -fx-border-color: #ffffff;" text="Cadastrar Locação" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="Segoe UI Semibold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="BotaoHistorico" layoutX="14.0" layoutY="120.0" mnemonicParsing="false" style="-fx-background-color: #9370DB;" text="Historico Locação">
+            <Button fx:id="BotaoHistorico" layoutX="13.0" layoutY="206.0" mnemonicParsing="false" style="-fx-background-color: #4B0082; -fx-border-color: #ffffff; -fx-border-radius: 20;" text="Historico Locação" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="Segoe UI Semibold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="BotaoCadastroCliente" layoutX="15.0" layoutY="82.0" mnemonicParsing="false" onAction="#irParaCadastroCliente" style="-fx-background-color: #9370DB;" text="Cadastrar Cliente">
+            <Button fx:id="BotaoCadastroCliente" layoutX="14.0" layoutY="168.0" mnemonicParsing="false" onAction="#irParaCadastroCliente" style="-fx-background-color: #4B0082; -fx-border-color: #ffffff; -fx-border-radius: 20;" text="Cadastrar Cliente" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="Segoe UI Semibold" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="14.0" layoutY="21.0" text="LOCADORA PEDRO" textFill="WHITE">
+               <font>
+                  <Font name="Impact" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnSair" layoutX="49.0" layoutY="451.0" mnemonicParsing="false" onAction="#sair" style="-fx-background-color: #4B0082; -fx-border-radius: 20; -fx-border-color: #ffffff;" text="Sair" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Semibold" size="12.0" />
                </font>
             </Button>
          </children>
