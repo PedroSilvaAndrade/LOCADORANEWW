@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="495.0" maxWidth="850.0" minHeight="0.0" minWidth="850.0" prefHeight="495.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaPrincipalController">
+<Pane maxHeight="495.0" maxWidth="850.0" minHeight="0.0" minWidth="850.0" prefHeight="495.0" prefWidth="832.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaPrincipalController">
    <children>
       <Pane layoutX="-1.0" prefHeight="593.0" prefWidth="142.0" style="-fx-background-color: #4B0082;">
          <children>
@@ -39,55 +40,192 @@
             </Button>
          </children>
       </Pane>
-      <Label layoutX="559.0" layoutY="85.0" text="FUNCIONÁRIO/ID">
+      <Label layoutX="550.0" layoutY="75.0" text="FUNCIONÁRIO/ID">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="Segoe UI Semibold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="589.0" layoutY="121.0" text="Pedro - 1">
+      <Label alignment="CENTER" layoutX="579.0" layoutY="110.0" text="Pedro - 1">
          <font>
-            <Font size="14.0" />
+            <Font name="Segoe UI Semibold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="588.0" layoutY="153.0" text="Rafael - 2">
+      <Label layoutX="576.0" layoutY="194.0" text="Rafael - 2">
          <font>
-            <Font size="14.0" />
+            <Font name="Segoe UI Semibold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="594.0" layoutY="189.0" text="Davi - 3">
+      <Label layoutX="582.0" layoutY="287.0" text="Davi - 3">
          <font>
-            <Font size="14.0" />
+            <Font name="Segoe UI Semibold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="165.0" layoutY="42.0" text="CARROS">
+      <Label layoutX="167.0" layoutY="21.0" text="CARROS">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Segoe UI Semibold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="167.0" layoutY="82.0" text="Placa">
+      <Label layoutX="183.0" layoutY="73.0" text="Placa">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="Segoe UI Semibold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="254.0" layoutY="82.0" text="Modelo">
+      <Label layoutX="264.0" layoutY="73.0" text="Modelo">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="Segoe UI Semibold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="357.0" layoutY="82.0" text="Fabricante">
+      <Label layoutX="360.0" layoutY="73.0" text="Fabricante">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="Segoe UI Semibold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="481.0" layoutY="82.0" text="Cor">
+      <Label layoutX="481.0" layoutY="73.0" text="Cor">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="Segoe UI Semibold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="709.0" layoutY="85.0" text="Tarifa(%)">
+      <Label layoutX="710.0" layoutY="75.0" text="Tarifa(%)">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="Segoe UI Semibold" size="14.0" />
          </font>
       </Label>
+      <Label layoutX="579.0" layoutY="150.0" text="Pedro - 1">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="576.0" layoutY="238.0" text="Rafael - 2">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="173.0" layoutY="110.0" text="ABC1D23">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="173.0" layoutY="150.0" text="DEF4G56">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="173.0" layoutY="194.0" text="GHI7H89">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="178.0" layoutY="238.0" text="JKL0I12">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="168.0" layoutY="287.0" text="MNO3P45">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="274.0" layoutY="110.0" text="Fiesta">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="269.0" layoutY="150.0" text="Corolla">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="281.0" layoutY="194.0" text="Gol">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="277.0" layoutY="238.0" text="Civic">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="277.0" layoutY="287.0" text="Onix">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="383.0" layoutY="110.0" text="Ford">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="376.0" layoutY="150.0" text="Toyota">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="359.0" layoutY="194.0" text="Volkswagen">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="376.0" layoutY="238.0" text="Honda">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="367.0" layoutY="287.0" text="Chevrolet">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="480.0" layoutY="110.0" text="Azul">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="476.0" layoutY="150.0" text="Preto">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="463.0" layoutY="194.0" text="Vermelho">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="471.0" layoutY="238.0" text="Branco">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="477.0" layoutY="287.0" text="Prata">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="729.0" layoutY="110.0" text="5%">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="729.0" layoutY="150.0" text="5%">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="729.0" layoutY="194.0" text="6%">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="729.0" layoutY="238.0" text="6%">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="729.0" layoutY="287.0" text="7%">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Line endX="100.0" layoutX="683.0" layoutY="98.0" scaleX="5.42" startX="-100.0" />
+      <Line endX="100.0" layoutX="698.0" layoutY="73.0" scaleX="5.57" startX="-100.0" />
    </children>
 </Pane>

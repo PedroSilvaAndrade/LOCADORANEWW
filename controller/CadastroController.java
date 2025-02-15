@@ -73,6 +73,11 @@ public class CadastroController {
         carregarClientes(); // Carrega os clientes do banco de dados
         cbFormaPagamento.getItems().addAll("Cartão", "Dinheiro", "Transferência", "PIX");
         cbPlacaVeiculo.getItems().addAll("ABC1D23", "DEF4G56", "GHI7H89", "JKL0I12", "MNO3P45");
+
+        // Adiciona um listener para a ChoiceBox de funcionários
+        cbFuncionarioID.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            atualizarPlacasPorFuncionario(newValue);
+        });
     }
 
     private void setRandomIdLocacao() {
@@ -90,6 +95,24 @@ public class CadastroController {
 
         // Adiciona os clientes à ChoiceBox
         cbClienteID.getItems().addAll(clientes);
+    }
+
+    private void atualizarPlacasPorFuncionario(String funcionarioSelecionado) {
+        cbPlacaVeiculo.getItems().clear(); // Limpa as placas atuais
+
+        if ("Pedro, ID 1".equals(funcionarioSelecionado)) {
+            // Adiciona apenas as placas específicas para o funcionário Pedro
+            cbPlacaVeiculo.getItems().addAll("ABC1D23", "DEF4G56");
+        } else if ("Rafael, ID 2".equals(funcionarioSelecionado)) {
+            // Adiciona apenas as placas específicas para o funcionário Rafael
+            cbPlacaVeiculo.getItems().addAll("GHI7H89", "JKL0I12");
+        } else if ("Davi, ID 3".equals(funcionarioSelecionado)) {
+            // Adiciona apenas a placa específica para o funcionário Davi
+            cbPlacaVeiculo.getItems().addAll("MNO3P45");
+        } else {
+            // Adiciona todas as placas se outro funcionário for selecionado
+            cbPlacaVeiculo.getItems().addAll("ABC1D23", "DEF4G56", "GHI7H89", "JKL0I12", "MNO3P45");
+        }
     }
 
     @FXML
