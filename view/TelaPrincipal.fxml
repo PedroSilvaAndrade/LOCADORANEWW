@@ -60,7 +60,7 @@
             <Font name="Segoe UI Semibold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="167.0" layoutY="21.0" text="CARROS">
+      <Label layoutX="167.0" layoutY="46.0" text="CARROS">
          <font>
             <Font name="Segoe UI Semibold" size="18.0" />
          </font>
@@ -85,7 +85,7 @@
             <Font name="Segoe UI Semibold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="710.0" layoutY="75.0" text="Tarifa(%)">
+      <Label layoutX="691.0" layoutY="76.0" text="Tarifa Diária(%)">
          <font>
             <Font name="Segoe UI Semibold" size="14.0" />
          </font>

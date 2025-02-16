@@ -13,7 +13,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
-import storage.VeiculosStorage;
 import storage.FuncionarioStorage;
 import storage.ClienteStorage;
 import storage.LocacaoStorage;
@@ -133,7 +132,6 @@ public class CadastroController {
 
     // Método para atualizar as placas de veículos com base no funcionário selecionado
     private void atualizarPlacasVeiculos(String funcionario) {
-        VeiculosStorage veiculosStorage = VeiculosStorage.getInstance();
         ObservableList<String> placasObservableList;
 
         switch (funcionario) {
@@ -154,26 +152,36 @@ public class CadastroController {
         cbPlacaVeiculo.setItems(placasObservableList);
     }
 
-    // Método para calcular o valor real com base na placa do veículo
     private void calcularValorReal(String placaVeiculo) {
         try {
             double valorPagar = Double.parseDouble(TextValor_Pagar.getText());
-
-            // Verifica se a placa do veículo é "ABC-1234" ou "DEF-5678" (5% de tarifa)
+            LocalDate dataInicio = DateDataInicio.getValue();
+            LocalDate dataFinal = DateDataFinal.getValue();
+    
+            if (dataInicio == null || dataFinal == null) {
+                lblValorReal.setText("Selecione as datas");
+                return;
+            }
+    
+            // Calcula o número de dias entre a data de início e a data final
+            long dias = java.time.temporal.ChronoUnit.DAYS.between(dataInicio, dataFinal) + 1; // +1 para incluir o dia inicial
+    
+            double tarifaDiaria = 0;
+    
+            // Verifica a tarifa com base na placa do veículo
             if (placaVeiculo.equals("ABC-1234") || placaVeiculo.equals("DEF-5678")) {
-                valorPagar *= 1.05; // Acrescenta 5%
+                tarifaDiaria = 0.05; // 5% de tarifa diária
+            } else if (placaVeiculo.equals("GHI-9101") || placaVeiculo.equals("JKL-1121")) {
+                tarifaDiaria = 0.06; // 6% de tarifa diária
+            } else if (placaVeiculo.equals("MNO-3141")) {
+                tarifaDiaria = 0.07; // 7% de tarifa diária
             }
-            // Verifica se a placa do veículo é "GHI-9101" ou "JKL-1121" (6% de tarifa)
-            else if (placaVeiculo.equals("GHI-9101") || placaVeiculo.equals("JKL-1121")) {
-                valorPagar *= 1.06; // Acrescenta 6%
-            }
-            // Verifica se a placa do veículo é "MNO-3141" (7% de tarifa)
-            else if (placaVeiculo.equals("MNO-3141")) {
-                valorPagar *= 1.07; // Acrescenta 7%
-            }
-
+    
+            // Aplica a tarifa diária ao valor total
+            double valorComTarifa = valorPagar * (1 + tarifaDiaria * dias);
+    
             // Exibe o valor real na label
-            lblValorReal.setText(String.format("R$ %.2f", valorPagar));
+            lblValorReal.setText(String.format("R$ %.2f", valorComTarifa));
         } catch (NumberFormatException e) {
             // Exibe uma mensagem de erro se o valor não for um número válido
             lblValorReal.setText("Valor inválido");
@@ -238,37 +246,41 @@ public class CadastroController {
         LocalDate dataFinal = DateDataFinal.getValue(); // Obtém a data final
         double valorPagar = Double.parseDouble(TextValor_Pagar.getText()); // Converte o texto para double
         String formaPagamento = cbFormaPagamento.getValue(); // Obtém a forma de pagamento selecionada
-
+    
         // Verifica se o veículo está disponível
         boolean disponivel = LocacaoStorage.getInstance().getLocacoes().stream()
             .noneMatch(locacao -> locacao.getPlacaVeiculo().equals(placaVeiculo)
                 && !dataInicio.isAfter(locacao.getDataFinal())
                 && !dataFinal.isBefore(locacao.getDataInicio()));
-
+    
         if (!disponivel) {
             lblStatus.setText("Indisponível");
             return; // Não prossegue com o salvamento
         }
-
-        // Verifica se a placa do veículo é "ABC-1234" ou "DEF-5678" (5% de tarifa)
+    
+        // Calcula o número de dias entre a data de início e a data final
+        long dias = java.time.temporal.ChronoUnit.DAYS.between(dataInicio, dataFinal) + 1; // +1 para incluir o dia inicial
+    
+        double tarifaDiaria = 0;
+    
+        // Verifica a tarifa com base na placa do veículo
         if (placaVeiculo.equals("ABC-1234") || placaVeiculo.equals("DEF-5678")) {
-            valorPagar *= 1.05; // Acrescenta 5%
+            tarifaDiaria = 0.05; // 5% de tarifa diária
+        } else if (placaVeiculo.equals("GHI-9101") || placaVeiculo.equals("JKL-1121")) {
+            tarifaDiaria = 0.06; // 6% de tarifa diária
+        } else if (placaVeiculo.equals("MNO-3141")) {
+            tarifaDiaria = 0.07; // 7% de tarifa diária
         }
-        // Verifica se a placa do veículo é "GHI-9101" ou "JKL-1121" (6% de tarifa)
-        else if (placaVeiculo.equals("GHI-9101") || placaVeiculo.equals("JKL-1121")) {
-            valorPagar *= 1.06; // Acrescenta 6%
-        }
-        // Verifica se a placa do veículo é "MNO-3141" (7% de tarifa)
-        else if (placaVeiculo.equals("MNO-3141")) {
-            valorPagar *= 1.07; // Acrescenta 7%
-        }
-
+    
+        // Aplica a tarifa diária ao valor total
+        double valorComTarifa = valorPagar * (1 + tarifaDiaria * dias);
+    
         // Criar um objeto Locacao com o ID gerado
-        Locacao locacao = new Locacao(idLocacaoGerado, idCliente, idFuncionario, placaVeiculo, dataInicio, dataFinal, valorPagar, formaPagamento);
-
+        Locacao locacao = new Locacao(idLocacaoGerado, idCliente, idFuncionario, placaVeiculo, dataInicio, dataFinal, valorComTarifa, formaPagamento);
+    
         // Armazenar a locação na LocacaoStorage
         LocacaoStorage.getInstance().adicionarLocacao(locacao);
-
+    
         // Limpar os campos após salvar
         cbClienteID.getSelectionModel().clearSelection();
         cbFuncionarioID.getSelectionModel().clearSelection();
@@ -277,11 +289,11 @@ public class CadastroController {
         DateDataFinal.setValue(null);
         TextValor_Pagar.clear();
         cbFormaPagamento.getSelectionModel().clearSelection();
-
+    
         // Gera um novo ID aleatório para a próxima locação
         idLocacaoGerado = gerarIdAleatorio();
         idLocacao.setText(String.valueOf(idLocacaoGerado));
-
+    
         System.out.println("Locação salva: " + locacao);
     }
 }
