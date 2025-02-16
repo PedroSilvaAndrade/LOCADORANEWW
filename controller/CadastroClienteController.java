@@ -1,18 +1,19 @@
 package controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
-import model.dao.CadastroClienteDAO;
+import storage.ClienteStorage;
+import classes.Cliente;
+import java.io.IOException;
 
 public class CadastroClienteController {
 
@@ -26,72 +27,68 @@ public class CadastroClienteController {
     private TextField TextNome_Cliente;
 
     @FXML
+    private ChoiceBox<String> cbSexoCliente; // Alterado para ChoiceBox<String>
+
+    @FXML
     private TextField TextIdade_Cliente;
 
     @FXML
     private TextField TextCNH_Cliente;
 
     @FXML
-    private ChoiceBox<String> cbSexoCliente;
-
-    @FXML
     private Button BotaoConfirmarCadastroCliente;
-
-    private Stage window;
-    private Scene scene;
-
-    // ArrayList para armazenar os dados do cliente
-    private ArrayList<String> dadosCliente = new ArrayList<>();
 
     @FXML
     void initialize() {
-        // Inicializa o ChoiceBox com as opções de sexo
-        cbSexoCliente.getItems().addAll("M", "F");
+        // Inicializa o ChoiceBox de sexo com as opções
+        ObservableList<String> opcoesSexo = FXCollections.observableArrayList(
+            "Masculino", "Feminino", "Outro"
+        );
+        cbSexoCliente.setItems(opcoesSexo);
     }
 
     @FXML
-    void voltarTelaPrincipal(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/TelaPrincipal.fxml"));
-        window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        window.setScene(scene);
-        window.show();
+    void voltarTelaPrincipal(ActionEvent event) {
+        try {
+            // Carrega o arquivo FXML da tela principal
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TelaPrincipal.fxml"));
+            Parent root = loader.load();
+
+            // Obtém o Stage atual a partir do botão clicado
+            Stage stage = (Stage) BotaoVoltar.getScene().getWindow();
+
+            // Define a nova cena no Stage
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erro ao carregar a tela principal.");
+        }
     }
 
     @FXML
     void salvarDadosCliente(ActionEvent event) {
-        CadastroClienteDAO cadastroClienteDAO = new CadastroClienteDAO(); // Instanciando a classe DAO
+        // Obter os dados dos campos de texto e ChoiceBox
+        int id = Integer.parseInt(TextID_Cliente.getText()); // Converte o texto para inteiro
+        String nome = TextNome_Cliente.getText();
+        String sexo = cbSexoCliente.getValue(); // Obtém o valor selecionado no ChoiceBox
+        int idade = Integer.parseInt(TextIdade_Cliente.getText()); // Converte o texto para inteiro
+        String cnh = TextCNH_Cliente.getText();
 
-        try {
-            // Coleta dos dados
-            int idCliente = Integer.parseInt(TextID_Cliente.getText());
-            String nomeCliente = TextNome_Cliente.getText();
-            int idadeCliente = Integer.parseInt(TextIdade_Cliente.getText());
-            String sexoCliente = cbSexoCliente.getValue(); // Coleta o valor do ChoiceBox
-            String cnhCliente = TextCNH_Cliente.getText();
+        // Criar um objeto Cliente
+        Cliente cliente = new Cliente(id, nome, sexo, idade, cnh);
 
-            // Validação dos dados
-            if (nomeCliente.isEmpty() || sexoCliente == null || cnhCliente.isEmpty()) {
-                System.out.println("Todos os campos devem ser preenchidos!");
-                return;
-            }
+        // Armazenar o cliente na ClienteStorage
+        ClienteStorage.getInstance().adicionarCliente(cliente);
 
-            // Adiciona os dados ao ArrayList
-            dadosCliente.add(String.valueOf(idCliente));
-            dadosCliente.add(nomeCliente);
-            dadosCliente.add(String.valueOf(idadeCliente));
-            dadosCliente.add(sexoCliente);
-            dadosCliente.add(cnhCliente);
+        // Limpar os campos após salvar
+        TextID_Cliente.clear();
+        TextNome_Cliente.clear();
+        cbSexoCliente.getSelectionModel().clearSelection();
+        TextIdade_Cliente.clear();
+        TextCNH_Cliente.clear();
 
-            // Chamar o método DAO para inserir no banco de dados
-            cadastroClienteDAO.inserirCliente(idCliente, nomeCliente, idadeCliente, sexoCliente, cnhCliente);
-
-            System.out.println("Dados do cliente salvos com sucesso: " + dadosCliente);
-
-        } catch (NumberFormatException e) {
-            System.out.println("Erro: ID e idade devem ser números!");
-        } catch (Exception e) {
-            System.out.println("Erro ao salvar: " + e.getMessage());
-        }
+        System.out.println("Cliente salvo: " + cliente);
     }
 }

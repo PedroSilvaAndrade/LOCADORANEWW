@@ -1,30 +1,27 @@
-package model;
+package classes;
 
 import java.time.LocalDate;
 
 public class Locacao {
-    // Atributos da classe
-    private int idLocacao;
-    private int idFuncionario;
+    private int idLocacao; // Novo atributo
     private int idCliente;
+    private int idFuncionario;
     private String placaVeiculo;
     private LocalDate dataInicio;
-    private LocalDate dataTermino;
+    private LocalDate dataFinal;
+    private double valorPagar;
     private String formaPagamento;
-    private double valorPago;
 
     // Construtor
-    public Locacao(int idLocacao, int idFuncionario, int idCliente, String placaVeiculo, 
-                   LocalDate dataInicio, LocalDate dataTermino, String formaPagamento, 
-                   double valorPago) {
+    public Locacao(int idLocacao, int idCliente, int idFuncionario, String placaVeiculo, LocalDate dataInicio, LocalDate dataFinal, double valorPagar, String formaPagamento) {
         this.idLocacao = idLocacao;
-        this.idFuncionario = idFuncionario;
         this.idCliente = idCliente;
+        this.idFuncionario = idFuncionario;
         this.placaVeiculo = placaVeiculo;
         this.dataInicio = dataInicio;
-        this.dataTermino = dataTermino;
+        this.dataFinal = dataFinal;
+        this.valorPagar = valorPagar;
         this.formaPagamento = formaPagamento;
-        this.valorPago = valorPago;
     }
 
     // Getters e Setters
@@ -36,20 +33,20 @@ public class Locacao {
         this.idLocacao = idLocacao;
     }
 
-    public int getIdFuncionario() {
-        return idFuncionario;
-    }
-
-    public void setIdFuncionario(int idFuncionario) {
-        this.idFuncionario = idFuncionario;
-    }
-
     public int getIdCliente() {
         return idCliente;
     }
 
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public int getIdFuncionario() {
+        return idFuncionario;
+    }
+
+    public void setIdFuncionario(int idFuncionario) {
+        this.idFuncionario = idFuncionario;
     }
 
     public String getPlacaVeiculo() {
@@ -68,12 +65,20 @@ public class Locacao {
         this.dataInicio = dataInicio;
     }
 
-    public LocalDate getDataTermino() {
-        return dataTermino;
+    public LocalDate getDataFinal() {
+        return dataFinal;
     }
 
-    public void setDataTermino(LocalDate dataTermino) {
-        this.dataTermino = dataTermino;
+    public void setDataFinal(LocalDate dataFinal) {
+        this.dataFinal = dataFinal;
+    }
+
+    public double getValorPagar() {
+        return valorPagar;
+    }
+
+    public void setValorPagar(double valorPagar) {
+        this.valorPagar = valorPagar;
     }
 
     public String getFormaPagamento() {
@@ -84,26 +89,17 @@ public class Locacao {
         this.formaPagamento = formaPagamento;
     }
 
-    public double getValorPago() {
-        return valorPago;
-    }
-
-    public void setValorPago(double valorPago) {
-        this.valorPago = valorPago;
-    }
-
-    // Método para exibir informações da locação
     @Override
     public String toString() {
         return "Locacao{" +
                 "idLocacao=" + idLocacao +
-                ", idFuncionario=" + idFuncionario +
                 ", idCliente=" + idCliente +
+                ", idFuncionario=" + idFuncionario +
                 ", placaVeiculo='" + placaVeiculo + '\'' +
                 ", dataInicio=" + dataInicio +
-                ", dataTermino=" + dataTermino +
+                ", dataFinal=" + dataFinal +
+                ", valorPagar=" + valorPagar +
                 ", formaPagamento='" + formaPagamento + '\'' +
-                ", valorPago=" + valorPago +
                 '}';
     }
 }

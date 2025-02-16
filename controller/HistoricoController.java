@@ -2,159 +2,162 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.event.ActionEvent;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.Locacoes;
-import model.dao.LocacoesDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import storage.LocacaoStorage;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.List;
+
+import classes.Locacao;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class HistoricoController {
+
+    @FXML
+    private TableColumn<Locacao, Integer> colIdLocacao;
 
     @FXML
     private Button BotaoVoltar;
 
     @FXML
+    private TableColumn<Locacao, String> colPlacaVeiculo;
+
+    @FXML
+    private TableColumn<Locacao, Double> colValorPago;
+
+    @FXML
     private TextField txtIDPesquisa;
 
     @FXML
-    private TableView<Locacoes> tbTabela;
+    private TableColumn<Locacao, Integer> colIdFuncionario;
 
     @FXML
-    private TableColumn<Locacoes, Integer> colIdLocacao;
+    private TableColumn<Locacao, Integer> colIdCliente;
 
     @FXML
-    private TableColumn<Locacoes, Integer> colIdCliente;
-
-    @FXML
-    private TableColumn<Locacoes, Integer> colIdFuncionario;
-
-    @FXML
-    private TableColumn<Locacoes, String> colPlacaVeiculo;
-
-    @FXML
-    private TableColumn<Locacoes, LocalDate> colDataInicio;
-
-    @FXML
-    private TableColumn<Locacoes, LocalDate> colDataTermino;
-
-    @FXML
-    private TableColumn<Locacoes, String> colFormaPagamento;
-
-    @FXML
-    private TableColumn<Locacoes, Double> colValorPago;
+    private Button btnPesquisar;
 
     @FXML
     private Button btnDelLocacao;
 
     @FXML
-    private Button btnPesquisar;
-
-    private LocacoesDAO locacoesDAO;
-
-    private Stage window;
-    private Scene scene;
+    private TableView<Locacao> tbTabela;
 
     @FXML
-    void acaoDelLocacao(ActionEvent event) {
-        // Obter a locação selecionada na tabela
-        Locacoes locacaoSelecionada = tbTabela.getSelectionModel().getSelectedItem();
-
-        if (locacaoSelecionada == null) {
-            System.out.println("Nenhuma locação selecionada!");
-            return;
-        }
-
-        // Deletar a locação do banco de dados
-        boolean deletado = locacoesDAO.deletarLocacao(locacaoSelecionada.getIdLocacao());
-
-        if (deletado) {
-            System.out.println("Locação deletada com sucesso!");
-
-            // Remover a locação da tabela
-            tbTabela.getItems().remove(locacaoSelecionada);
-        } else {
-            System.out.println("Erro ao deletar locação!");
-        }
-    }
+    private TableColumn<Locacao, String> colDataTermino;
 
     @FXML
-    public void initialize() {
-        // Inicializar o DAO
-        locacoesDAO = new LocacoesDAO();
+    private TableColumn<Locacao, String> colFormaPagamento;
 
-        // Configurar as colunas da tabela
+    @FXML
+    private TableColumn<Locacao, String> colDataInicio;
+
+    @FXML
+    void initialize() {
+        // Configura as colunas da tabela
         colIdLocacao.setCellValueFactory(new PropertyValueFactory<>("idLocacao"));
         colIdCliente.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
         colIdFuncionario.setCellValueFactory(new PropertyValueFactory<>("idFuncionario"));
         colPlacaVeiculo.setCellValueFactory(new PropertyValueFactory<>("placaVeiculo"));
         colDataInicio.setCellValueFactory(new PropertyValueFactory<>("dataInicio"));
-        colDataTermino.setCellValueFactory(new PropertyValueFactory<>("dataTermino"));
+        colDataTermino.setCellValueFactory(new PropertyValueFactory<>("dataFinal"));
         colFormaPagamento.setCellValueFactory(new PropertyValueFactory<>("formaPagamento"));
-        colValorPago.setCellValueFactory(new PropertyValueFactory<>("valorPago"));
+        colValorPago.setCellValueFactory(new PropertyValueFactory<>("valorPagar"));
 
-        // Carregar todas as locações ao inicializar
-        carregarTodasLocacoes();
-    }
-
-    private void carregarTodasLocacoes() {
-        // Buscar todas as locações do banco de dados
-        List<Locacoes> locacoes = locacoesDAO.buscarTodasLocacoes();
-
-        // Adicionar as locações à tabela
-        ObservableList<Locacoes> listaLocacoes = FXCollections.observableArrayList(locacoes);
-        tbTabela.setItems(listaLocacoes);
+        // Carrega os dados na tabela
+        carregarDadosTabela();
     }
 
     @FXML
-    void voltarTelaPrincipal(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/TelaPrincipal.fxml"));
-        window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        window.setScene(scene);
-        window.show();
+    void voltarTelaPrincipal(ActionEvent event) {
+        try {
+            // Carrega o arquivo FXML da tela principal
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TelaPrincipal.fxml"));
+            Parent root = loader.load();
+
+            // Obtém o Stage atual a partir do botão clicado
+            Stage stage = (Stage) BotaoVoltar.getScene().getWindow();
+
+            // Define a nova cena no Stage
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erro ao carregar a tela principal.");
+        }
     }
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        try {
-            // Obter o ID da locação digitado
-            String idText = txtIDPesquisa.getText().trim();
-            if (idText.isEmpty()) {
-                System.out.println("Por favor, digite um ID de locação");
-                return;
+        String idPesquisa = txtIDPesquisa.getText().trim();
+        if (idPesquisa.isEmpty()) {
+            // Se o campo de pesquisa estiver vazio, carrega todos os dados
+            carregarDadosTabela();
+        } else {
+            try {
+                int id = Integer.parseInt(idPesquisa);
+                // Filtra a locação pelo ID
+                Locacao locacao = LocacaoStorage.getInstance().getLocacoes().stream()
+                    .filter(l -> l.getIdLocacao() == id)
+                    .findFirst()
+                    .orElse(null);
+
+                if (locacao != null) {
+                    // Exibe a locação encontrada na tabela
+                    ObservableList<Locacao> locacoes = FXCollections.observableArrayList();
+                    locacoes.add(locacao);
+                    tbTabela.setItems(locacoes);
+                } else {
+                    // Exibe uma mensagem se nenhuma locação for encontrada
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Pesquisa");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Nenhuma locação encontrada com o ID informado.");
+                    alert.showAndWait();
+                }
+            } catch (NumberFormatException e) {
+                // Exibe uma mensagem de erro se o ID não for um número válido
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erro");
+                alert.setHeaderText(null);
+                alert.setContentText("O ID deve ser um número válido.");
+                alert.showAndWait();
             }
-
-            int idLocacao = Integer.parseInt(idText);
-
-            // Buscar a locação no banco de dados
-            Locacoes locacao = locacoesDAO.buscarLocacaoPorId(idLocacao);
-
-            // Limpar a tabela
-            tbTabela.getItems().clear();
-
-            if (locacao != null) {
-                // Adicionar a locação encontrada à tabela
-                ObservableList<Locacoes> listaLocacoes = FXCollections.observableArrayList(locacao);
-                tbTabela.setItems(listaLocacoes);
-            } else {
-                System.out.println("Locação não encontrada");
-            }
-
-        } catch (NumberFormatException e) {
-            System.out.println("Por favor, digite um número válido para o ID");
         }
+    }
+
+    @FXML
+    void acaoDelLocacao(ActionEvent event) {
+        Locacao locacaoSelecionada = tbTabela.getSelectionModel().getSelectedItem();
+        if (locacaoSelecionada != null) {
+            // Remove a locação selecionada da lista
+            LocacaoStorage.getInstance().getLocacoes().remove(locacaoSelecionada);
+            // Recarrega os dados na tabela
+            carregarDadosTabela();
+        } else {
+            // Exibe uma mensagem se nenhuma locação estiver selecionada
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Aviso");
+            alert.setHeaderText(null);
+            alert.setContentText("Selecione uma locação para excluir.");
+            alert.showAndWait();
+        }
+    }
+
+    // Método para carregar os dados na tabela
+    private void carregarDadosTabela() {
+        ObservableList<Locacao> locacoes = FXCollections.observableArrayList(LocacaoStorage.getInstance().getLocacoes());
+        tbTabela.setItems(locacoes);
     }
 }
