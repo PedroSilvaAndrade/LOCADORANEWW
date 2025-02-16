@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
@@ -22,6 +23,12 @@ public class CadastroClienteController {
 
     @FXML
     private TextField TextID_Cliente;
+
+    @FXML
+    private Label lblAvisoCNH;
+
+    @FXML
+    private Label lblAvisoID;
 
     @FXML
     private TextField TextNome_Cliente;
@@ -45,6 +52,10 @@ public class CadastroClienteController {
             "Masculino", "Feminino", "Outro"
         );
         cbSexoCliente.setItems(opcoesSexo);
+
+        // Limpa as mensagens de erro ao inicializar
+        lblAvisoID.setText("");
+        lblAvisoCNH.setText("");
     }
 
     @FXML
@@ -69,26 +80,46 @@ public class CadastroClienteController {
 
     @FXML
     void salvarDadosCliente(ActionEvent event) {
-        // Obter os dados dos campos de texto e ChoiceBox
-        int id = Integer.parseInt(TextID_Cliente.getText()); // Converte o texto para inteiro
-        String nome = TextNome_Cliente.getText();
-        String sexo = cbSexoCliente.getValue(); // Obtém o valor selecionado no ChoiceBox
-        int idade = Integer.parseInt(TextIdade_Cliente.getText()); // Converte o texto para inteiro
-        String cnh = TextCNH_Cliente.getText();
+        // Limpa as mensagens de erro antes de verificar
+        lblAvisoID.setText("");
+        lblAvisoCNH.setText("");
 
-        // Criar um objeto Cliente
-        Cliente cliente = new Cliente(id, nome, sexo, idade, cnh);
+        try {
+            // Obter os dados dos campos de texto e ChoiceBox
+            int id = Integer.parseInt(TextID_Cliente.getText()); // Converte o texto para inteiro
+            String nome = TextNome_Cliente.getText();
+            String sexo = cbSexoCliente.getValue(); // Obtém o valor selecionado no ChoiceBox
+            int idade = Integer.parseInt(TextIdade_Cliente.getText()); // Converte o texto para inteiro
+            String cnh = TextCNH_Cliente.getText();
 
-        // Armazenar o cliente na ClienteStorage
-        ClienteStorage.getInstance().adicionarCliente(cliente);
+            // Verifica se o ID já existe
+            if (ClienteStorage.getInstance().idExiste(id)) {
+                lblAvisoID.setText("Erro: Já existe um cliente com este ID.");
+                return; // Interrompe o salvamento
+            }
 
-        // Limpar os campos após salvar
-        TextID_Cliente.clear();
-        TextNome_Cliente.clear();
-        cbSexoCliente.getSelectionModel().clearSelection();
-        TextIdade_Cliente.clear();
-        TextCNH_Cliente.clear();
+            // Verifica se o CNH já existe
+            if (ClienteStorage.getInstance().cnhExiste(cnh)) {
+                lblAvisoCNH.setText("Erro: Já existe um cliente com este CNH.");
+                return; // Interrompe o salvamento
+            }
 
-        System.out.println("Cliente salvo: " + cliente);
+            // Criar um objeto Cliente
+            Cliente cliente = new Cliente(id, nome, sexo, idade, cnh);
+
+            // Armazenar o cliente na ClienteStorage
+            ClienteStorage.getInstance().adicionarCliente(cliente);
+
+            // Limpar os campos após salvar
+            TextID_Cliente.clear();
+            TextNome_Cliente.clear();
+            cbSexoCliente.getSelectionModel().clearSelection();
+            TextIdade_Cliente.clear();
+            TextCNH_Cliente.clear();
+
+            System.out.println("Cliente salvo: " + cliente);
+        } catch (NumberFormatException e) {
+            System.out.println("Erro: ID ou idade inválidos. Certifique-se de que são números.");
+        }
     }
 }
